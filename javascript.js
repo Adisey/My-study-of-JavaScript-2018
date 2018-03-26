@@ -435,7 +435,7 @@ var list = {
     }
   }
 };
-// аналог 
+// аналог записанный по другому 
 //var list = { value: 1 };
 //list.next = { value: 2 };
 //list.next.next = { value: 3 };
@@ -443,11 +443,54 @@ var list = {
 
 printList(list);
 dw("============================");
+var arr = ["воз", "киборг", "корсет", "ЗОВ", "гробик", "костер", "сектор"];
+//aclean(arr), которая возвращает массив слов, очищенный от анаграмм.
+dw( aclean(arr));
+
 dw("============================");
+var strings = ["кришна", "кришна", "харе", "харе",
+  "харе", "харе", "кришна", "кришна", "8-()"
+];
+//unique(arr), которая возвращает массив, содержащий только уникальные элементы arr.
+dw( unique(strings) ); // кришна, харе, 8-()
+
 dw("============================");
 dw("============================");
 
 dw("==========End===============");
+
+function unique(arr) {
+ // этот объект будем использовать для уникальности
+  var obj = {};
+
+  for (var i = 0; i < arr.length; i++) {
+    obj[arr[i]] = arr[i]; // сохраняет только одно значение
+  }
+//  var result = [];
+//  for (var key in obj) result.push(obj[key]);
+//  return result;
+    return Object.keys(obj);
+}
+
+
+function aclean(arr) {
+  // этот объект будем использовать для уникальности
+  var obj = {};
+
+  for (var i = 0; i < arr.length; i++) {
+    // разбить строку на буквы, отсортировать и слить обратно
+    var sorted = arr[i].toLowerCase().split('').sort().join(''); // (*)
+
+    obj[sorted] = arr[i]; // сохраняет только одно значение с таким ключом
+  }
+
+  var result = [];
+
+  // теперь в obj находится для каждого ключа ровно одно значение
+  for (var key in obj) result.push(obj[key]);
+
+  return result;
+}
 
 function printList(list) {
   var tmp = list;
