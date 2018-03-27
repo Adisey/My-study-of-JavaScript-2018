@@ -487,10 +487,39 @@ var arrs = getSums(arr);
 dwarr(arrs);
 
 dw("============================");
-
 dw(sssum(1, 2, 3, 4, 5, 6, 7, 8, 9 ));
 
 dw("============================");
+var now = new Date();
+dw( now );
+var da = new Date(2018,03,23);
+dw(da);
+var date = new Date(2011, 0, 1, 2, 3, 4, 567);
+dw (date);
+
+// текущая дата
+var date = new Date();
+// час в текущей временной зоне
+dw('У нас (час) - '+date.getHours() );
+// сколько сейчас времени в Лондоне?
+// час в зоне GMT+0
+dw('По гринвичу - '+ date.getUTCHours() );
+
+dw("Наша таймзона - " + new Date().getTimezoneOffset()); 
+ 
+var today = new Date;
+today.setHours(0);
+today.setFullYear(2018 , 01, 29);
+dw(today);
+
+var start = new Date; // засекли время
+// что-то сделать
+for (var i = 0; i < 10000000; i++) {
+  var doSomething = i * i * i;
+}
+var end = new Date; // конец измерения
+dw( "Цикл занял " + (end - start) + " ms" );
+
 dw("============================");
 dw("============================");
 dw("============================");
