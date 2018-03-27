@@ -508,8 +508,8 @@ dw('По гринвичу - '+ date.getUTCHours() );
 dw("Наша таймзона - " + new Date().getTimezoneOffset()); 
  
 var today = new Date;
-today.setHours(0);
-today.setFullYear(2018 , 01, 29);
+today.setHours(15, 15, 15, 511);
+today.setFullYear(2018, 02, 08);
 dw(today);
 
 var start = new Date; // засекли время
@@ -521,6 +521,32 @@ var end = new Date; // конец измерения
 dw( "Цикл занял " + (end - start) + " ms" );
 
 dw("============================");
+var arr = [];
+for (var i = 0; i < 1000; i++) arr[i] = 0;
+
+function walkIn(arr) {
+  for (var key in arr) arr[key]++;
+}
+
+function walkLength(arr) {
+  for (var i = 0; i < arr.length; i++) arr[i]++;
+}
+
+function bench(f) {
+  for (var i = 0; i < 10000; i++) f(arr);
+}
+
+console.time("All Benchmarks");
+
+console.time("walkIn");
+bench(walkIn);
+console.timeEnd("walkIn");
+
+console.time("walkLength");
+bench(walkLength);
+console.timeEnd("walkLength");
+
+console.timeEnd("All Benchmarks");
 dw("============================");
 dw("============================");
 dw("============================");
