@@ -487,6 +487,9 @@ var arrs = getSums(arr);
 dwarr(arrs);
 
 dw("============================");
+
+dw(sssum(1, 2, 3, 4, 5, 6, 7, 8, 9 ));
+
 dw("============================");
 dw("============================");
 dw("============================");
@@ -495,6 +498,22 @@ dw("============================");
 
 dw("==========End===============");
 
+function sssum() {
+//    Проверка самого себя на знание ".reduce("
+//    var arg = [];
+//    for (var i = 0; i < arguments.length; i++) {
+//        arg[i] = arguments[i];
+//    }
+//    var result = arg.reduce(function(sum, current) {
+//        return sum + current;
+//    });
+//     а теперь проще ;)
+    var result=0;
+    for (var i = 0; i < arguments.length; i++) {
+        result += arguments[i];
+    };  
+    return result;
+}
 function getSums(arr) {
   var result = [];
   if (!arr.length) return result;
