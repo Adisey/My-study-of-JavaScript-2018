@@ -477,8 +477,15 @@ var arr2Lengths = arr.map(function(arr) {
 });
 dw( arr2Lengths );
 
-
 dw("============================");
+var arr = [ 1, 2, 3, 4, 5, 6, 10]; //[ 1, 3, 6, 10, 15, 21, 31 ]
+var arrs = getSums(arr);
+dwarr(arrs);
+dw('---');
+var arr = [-2,-1,0,1,8,-5]; // [-2,-3,-3,-2,6,1].
+var arrs = getSums(arr);
+dwarr(arrs);
+
 dw("============================");
 dw("============================");
 dw("============================");
@@ -487,6 +494,18 @@ dw("============================");
 dw("============================");
 
 dw("==========End===============");
+
+function getSums(arr) {
+  var result = [];
+  if (!arr.length) return result;
+  var totalSum = arr.reduce(function(sum, item) {
+    result.push(sum);
+    return sum + item;
+  });
+  result.push(totalSum);
+
+  return result;
+}
 
 function unique(arr) {
  // этот объект будем использовать для уникальности
