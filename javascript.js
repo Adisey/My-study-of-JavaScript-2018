@@ -548,10 +548,129 @@ console.timeEnd("walkLength");
 
 console.timeEnd("All Benchmarks");
 dw("============================");
-dw("============================");
-dw("============================");
+var date = new Date(2012,0,3);  // 3 января 2012
+dw(date + ' - ' + getWeekDay(date) );      // Должно вывести 'вт'
+var date = new Date();  // Today
+dw(date + ' - ' + getWeekDay(date) );      
 
+dw("============================");
+var date = new Date(2015, 0, 2);
+dw(date);
+dw('---');
+dw( getDateAgo(date, 1) ); // 1, (1 января 2015)
+dw( getDateAgo(date, 2) ); // 31, (31 декабря 2014)
+dw( getDateAgo(date, 365) ); // 2, (2 января 2014)
+
+dw("============================");
+var date = new Date();
+dw(ruDate(date));
+dw(ruDate(date,'M'));
+dw(ruDate(date,'Z'));
+dw(ruDate(date,'T'));
+dw(ruDate(date,'TS'));
+dw(ruDate(date,'TSs'));
+dw(ruDate(date,'Ss'));
+dw(ruDate(date,'s'));
+dw(ruDate(date,'SMTZs'));
+dw("============================");
+dw("============================");
+dw("============================");
+dw("============================");
 dw("==========End===============");
+
+/**
+ * getDateAgo - функция , которая возвращает число, которое было days дней назад от даты date.
+ * @author Adisey.
+ * @param {date} date -  передаваемая дата
+ * @param {num} days - число дней вычитаемых из date
+ * @return newDate
+ */
+function getDateAgo(date, days) {
+    var newDate = date;
+    newDate.setDate(newDate.getDate() - days);
+    return newDate;
+}
+
+/**
+ * ruDate - Преобразование даты в удобочитаемый стринг
+ * @author Adisey.
+ * @param {data} data - входная дата
+ * @param {srt} format - "MTZs":
+ * M - показать месяц в буквеном формате
+ * Z - показать твймзону
+ * T - показать время
+ * S - показать секунды
+ * s - показать доли секунд
+ * @return {str} result -  возвращаемая стока
+ */
+function ruDate(data, format) {
+    format = (format===undefined)? '':format;
+    var tmpM;
+    if (format.indexOf('M')<0) {
+        tmpM = (data.getMonth()+1);
+        tmpM = '.'+((tmpM<10)? '0'+tmpM: tmpM)+'.';
+    } else {  
+        var ruMonth = ["января","февраля","марта", "апроеля", "мая", "июня","июля", "августа", "сентября", "октября", "ноября", "декабря"];
+        tmpM = ' '+ruMonth[data.getMonth()]+' ';     
+    }           
+    var result = data.getDate()+ tmpM+ data.getFullYear();
+    if (format.length>0) {
+        if (format.indexOf('Z')>=0) {
+            result += ' (GMT'+data.getTimezoneOffset()/60+') ';
+        };
+        if (format.indexOf('T')>=0) {
+            var hh = date.getHours();
+            hh = (hh<10)? '0'+hh:hh;
+            var mm = date.getMinutes();
+            mm = (mm<10)? '0'+mm:mm;
+            var ss = date.getSeconds();
+            ss = (ss<10)? '0'+ss:ss;
+            //getHours(), getMinutes(), getSeconds(), getMilliseconds()
+            result += ' '+hh+':'+mm;
+            if (format.indexOf('S')>=0) {
+                result += ':'+ss;
+                if (format.indexOf('S')>=0) {
+                    result += '.'+date.getMilliseconds();
+                }
+            }
+        };
+    };
+
+    return result;
+}
+
+/**
+ * getWeekDay -  функция, которая выводит текущий день недели в коротком формате „пн“, „вт“, … „вс“.
+ * @author Adisey.
+ * @param {Data} date
+ * @return {str} wdr 
+ */
+function getWeekDay(date) {
+// Через case
+//    var wdn=date.getDay();
+//    switch (wdn) {
+//    case 0:
+//      return 'вс';
+//    case 1:
+//      return 'пн';
+//    case 2:
+//      return 'вт';
+//    case 3:
+//      return 'ср';
+//    case 4:
+//      return 'чт';
+//    case 5:
+//      return 'пт';
+//    case 6:
+//      return 'сб';
+//    default:
+//      return 'ХЗ';
+//    }
+// через массив
+  var days = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+
+  return days[date.getDay()];    
+}
 
 function sssum() {
 //    Проверка самого себя на знание ".reduce("
