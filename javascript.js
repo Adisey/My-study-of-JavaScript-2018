@@ -1,5 +1,7 @@
 /* global compareNumeric */
 
+//Загружено в PHPShtorm
+
 dw("Эта надписть сделана JS из отдельного фала!"+"<br/>");
 dws();
 var ccc=6;
